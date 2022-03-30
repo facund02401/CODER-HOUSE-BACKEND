@@ -24,8 +24,8 @@ class Usuario {
 
   getBookNames() {
     const arrayNombresLibros = [];
-    for ( const cadaLibro in this.libros){
-        arrayNombresLibros.push(this.libros[cadaLibro]['nombre'])
+    for (const cadaLibro in this.libros) {
+      arrayNombresLibros.push(this.libros[cadaLibro]["nombre"]);
     }
     console.log(arrayNombresLibros);
   }
@@ -38,13 +38,12 @@ const usuario = new Usuario(
   ["acacia"]
 );
 
-
 console.log(usuario);
 usuario.getFullName();
 usuario.countMascotas();
 usuario.getBookNames();
 
-usuario.addMascota('gato');
-usuario.addBook('Rayuela', 'Cortazar');
+usuario.addMascota("gato");
+usuario.addBook("Rayuela", "Cortazar");
 usuario.countMascotas();
 usuario.getBookNames();
