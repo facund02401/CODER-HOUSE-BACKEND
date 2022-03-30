@@ -59,51 +59,38 @@ class Contenedor {
     }
   }
 
-  deleteAll() {
-      // PRIMER INTENTO, no funciona, al sobreescribir no lo hace correctamente
- //     try {
- //     this.productos = []
- //       console.log(JSON.stringify(this.productos))
- //       this.productos = JSON.stringify(this.productos)
- //       console.log(this.productos)
- //     fs.promises.readFile(`./${this.ruta}`, "utf-8");
- //     fs.writeFileSync(this.ruta, this.productos);
- //     console.log("Todos los productos fueron eliminados");
- //   } catch (err) {
- //     console.log(err);
- //   }
+  async deleteAll() {
+    // PRIMER INTENTO, no funciona, al sobreescribir no lo hace correctamente
+    //     try {
+    //     this.productos = []
+    //       console.log(JSON.stringify(this.productos))
+    //       this.productos = JSON.stringify(this.productos)
+    //       console.log(this.productos)
+    //     fs.promises.readFile(`./${this.ruta}`, "utf-8");
+    //     fs.writeFile(this.ruta, this.productos);
+    //     console.log("Todos los productos fueron eliminados");
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
 
- fs.promises.readFile(this.ruta, 'utf-8')
-        .then(content => {
-           
-            this.productos = [];
-           
-            try { fs.promises.writeFile(this.ruta, this.productos)
-                console.log('Se eliminaron los productos.')
-            }
-            catch (err) {
-                console.log('No se pudo escribir el archivo!', err)
-            }
-        })
-        .catch(err => {console.log('Error de Lectura', err)})
+    const data = await fs.promises.readFile(this.ruta, "utf-8"); // PARECE QUE HAY QUE LEERLO ANTES DE PODER SOBREESCRIBIRLO
+    //console.log(data)
+    this.productos = [];
+    try {
+      await fs.promises.writeFile(this.ruta, this.productos);
+      console.log("Se eliminaron los productos.");
+    } catch (err) {
+      console.log("No se pudo escribir el archivo!", err);
+    }
   }
 }
 
 const prueba = new Contenedor("productos.txt");
-//try{
-//    prueba.save({title: 'algo', price: 123})
-//    prueba.save({title: 'algo2', price: 127})
-//    prueba.save({title: 'algo3', price: 1027})
-//
-//}
-//finally{
-//    prueba.getById(2)
-//
-//}
+
 prueba.save({ title: "algo", price: 123 });
 prueba.save({ title: "algo2", price: 127 });
 //prueba.save({title: 'algo3', price: 1027})
-//prueba.deleteAll();
+prueba.deleteAll();
 //prueba.getAll();
 //prueba.getById(2)
 //prueba.deleteById(1)
