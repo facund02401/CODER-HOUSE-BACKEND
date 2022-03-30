@@ -34,13 +34,17 @@ class Contenedor {
       .catch((err) => console.log(err));
   }
 
-  getAll() {
-    try {
-      const datos = fs.promises.readFile(this.ruta, "utf-8");
-      this.productos = JSON.parse(datos);
-      console.log(this.productos);
-    } catch (err) {
-      console.log(err);
+  async getAll() {
+    if (this.productos.length) {
+      try {
+        const datos = await fs.promises.readFile(this.ruta, "utf-8");
+        this.productos = await JSON.parse(datos);
+        //console.log(this.productos);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      console.log("No hay productos listados.");
     }
   }
 
@@ -73,11 +77,11 @@ class Contenedor {
     //     console.log(err);
     //   }
 
-    const data = await fs.promises.readFile(this.ruta, "utf-8"); // PARECE QUE HAY QUE LEERLO ANTES DE PODER SOBREESCRIBIRLO
     //console.log(data)
-    this.productos = [];
     try {
-      await fs.promises.writeFile(this.ruta, this.productos);
+        const data = await fs.promises.readFile(this.ruta, "utf-8"); // PARECE QUE HAY QUE LEERLO ANTES DE PODER SOBREESCRIBIRLO
+        this.productos = [];
+        await fs.promises.writeFile(this.ruta, this.productos);
       console.log("Se eliminaron los productos.");
     } catch (err) {
       console.log("No se pudo escribir el archivo!", err);
@@ -89,9 +93,10 @@ const prueba = new Contenedor("productos.txt");
 
 prueba.save({ title: "algo", price: 123 });
 prueba.save({ title: "algo2", price: 127 });
-//prueba.save({title: 'algo3', price: 1027})
+prueba.save({title: 'algo3', price: 1027})
+
 prueba.deleteAll();
 //prueba.getAll();
 //prueba.getById(2)
 //prueba.deleteById(1)
-//prueba.getAll()
+
