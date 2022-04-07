@@ -1,0 +1,22 @@
+{
+  "name": "coder-house-backend",
+  "version": "1.0.0",
+  "description": "Link al repo del curso:\r https://github.com/drmaquino/ch-backend-30935",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/facund02401/CODER-HOUSE-BACKEND.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/facund02401/CODER-HOUSE-BACKEND/issues"
+  },
+  "homepage": "https://github.com/facund02401/CODER-HOUSE-BACKEND#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
