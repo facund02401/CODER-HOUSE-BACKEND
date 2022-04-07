@@ -1,4 +1,4 @@
-import Contenedor from "./Tarea3Clases";
+const Contenedor = require("./Tarea3Clases");
 
 const contenedorPrueba = new Contenedor("productos.txt");
 
@@ -22,10 +22,13 @@ app.get("/", (req, res) => {
   res.send("Tarea 3");
 });
 
-app.get("/productos", (req, res) => {
-  res.send(contenedorPrueba.getAll());
+app.get("/productos", async (req, res) => {
+  const todosProductos = await contenedorPrueba.getAll()
+  res.send(todosProductos);
 });
 
-app.get("/productoRandom", (req, res) => {
-  res.send(contenedorPrueba.getRandomItem);
+app.get("/productoRandom", async (req, res) => {
+  const objetoRandom = await contenedorPrueba.getRandomItem()
+  console.log(objetoRandom)
+  res.send(objetoRandom);
 });

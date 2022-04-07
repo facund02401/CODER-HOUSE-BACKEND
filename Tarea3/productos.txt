@@ -1,0 +1,1 @@
+[{"item":"azucar","price":150,"id":1},{"item":"fideos","price":80,"id":2},{"item":"gaseosa","price":110,"id":3}]

@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-export default class Contenedor {
+class Contenedor {
   constructor(ruta) {
     this.ruta = ruta;
     this.productos = [];
@@ -39,7 +39,7 @@ export default class Contenedor {
       try {
         const datos = await fs.promises.readFile(this.ruta, "utf-8");
         this.productos = await JSON.parse(datos);
-        //console.log(this.productos);
+        return this.productos
       } catch (err) {
         console.log(err);
       }
@@ -88,9 +88,10 @@ export default class Contenedor {
     }
   }
 
-  getRandomItem() {
+  async getRandomItem() {
     const randomItem = Math.floor(Math.random() * this.productos.length);
-    return randomItem;
+    return (await this.productos[randomItem])
   }
 }
 
+module.exports = Contenedor
